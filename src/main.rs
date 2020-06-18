@@ -1,3 +1,4 @@
+use std::env;
 use actix_web::{web, App, HttpResponse, HttpServer, Responder};
 
 async fn index() -> impl Responder {
@@ -10,12 +11,19 @@ async fn index2() -> impl Responder {
 
 #[actix_rt::main]
 async fn main() -> std::io::Result<()> {
+    let port;
+    match env::var("PORT") {
+        Ok(val) => port = val,
+        Err(_e) => port = "none".to_string(),
+    }
+    let bindtarget = format!("127.0.0.1:{}", port); 
+
     HttpServer::new(|| {
         App::new()
             .route("/", web::get().to(index))
             .route("/again", web::get().to(index2))
     })
-    .bind("127.0.0.1:8088")?
+    .bind(bindtarget)?
     .run()
     .await
 }
