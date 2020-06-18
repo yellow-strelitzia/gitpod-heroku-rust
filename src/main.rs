@@ -14,7 +14,7 @@ async fn main() -> std::io::Result<()> {
     let port;
     match env::var("PORT") {
         Ok(val) => port = val,
-        Err(_e) => port = "none".to_string(),
+        Err(_e) => port = "8080".to_string(),
     }
     let bindtarget = format!("127.0.0.1:{}", port); 
 

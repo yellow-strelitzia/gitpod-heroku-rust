@@ -1,4 +1,4 @@
-FROM rust:alpine
+FROM rust:slim
 WORKDIR /app
 COPY . /app
 
