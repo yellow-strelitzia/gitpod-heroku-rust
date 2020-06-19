@@ -16,7 +16,7 @@ async fn main() -> std::io::Result<()> {
         Ok(val) => port = val,
         Err(_e) => port = "8080".to_string(),
     }
-    let bindtarget = format!("127.0.0.1:{}", port); 
+    let bindtarget = format!("0.0.0.0:{}", port); 
 
     HttpServer::new(|| {
         App::new()
